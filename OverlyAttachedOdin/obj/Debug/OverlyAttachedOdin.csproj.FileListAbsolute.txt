@@ -1,0 +1,6 @@
+D:\Modding\Valheim\OliValheimMod\OverlyAttachedOdin\OverlyAttachedOdin\OverlyAttachedOdin\bin\Debug\OverlyAttachedOdin.dll
+D:\Modding\Valheim\OliValheimMod\OverlyAttachedOdin\OverlyAttachedOdin\OverlyAttachedOdin\bin\Debug\OverlyAttachedOdin.pdb
+D:\Modding\Valheim\OliValheimMod\OverlyAttachedOdin\OverlyAttachedOdin\OverlyAttachedOdin\obj\Debug\OverlyAttachedOdin.csprojAssemblyReference.cache
+D:\Modding\Valheim\OliValheimMod\OverlyAttachedOdin\OverlyAttachedOdin\OverlyAttachedOdin\obj\Debug\OverlyAttachedOdin.csproj.CoreCompileInputs.cache
+D:\Modding\Valheim\OliValheimMod\OverlyAttachedOdin\OverlyAttachedOdin\OverlyAttachedOdin\obj\Debug\OverlyAttachedOdin.dll
+D:\Modding\Valheim\OliValheimMod\OverlyAttachedOdin\OverlyAttachedOdin\OverlyAttachedOdin\obj\Debug\OverlyAttachedOdin.pdb

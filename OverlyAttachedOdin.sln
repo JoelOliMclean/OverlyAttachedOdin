@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverlyAttachedOdin", "OverlyAttachedOdin\OverlyAttachedOdin.csproj", "{9C750C3D-018C-4BE5-A6DC-A524B1C445BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C750C3D-018C-4BE5-A6DC-A524B1C445BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C750C3D-018C-4BE5-A6DC-A524B1C445BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C750C3D-018C-4BE5-A6DC-A524B1C445BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C750C3D-018C-4BE5-A6DC-A524B1C445BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15E48250-F56D-4D79-9B6E-9F222B3341AE}
+	EndGlobalSection
+EndGlobal
