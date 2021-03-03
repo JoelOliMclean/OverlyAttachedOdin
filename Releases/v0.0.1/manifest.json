@@ -1,0 +1,9 @@
+{
+    "name": "OverlyAttachedOdin",
+    "version_number": "0.0.1",
+    "website_url": "https://github.com/JoelOliMclean/OverlyAttachedOdin",
+    "description": "What if Odin become your best friend, even if you don't want him to?",
+    "dependencies": [
+        "denikson-BepInExPack_Valheim-5.4.701"
+    ]
+}
