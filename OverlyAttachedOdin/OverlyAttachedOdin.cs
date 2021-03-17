@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BepInEx;
+using BepInEx.Configuration;
 using HarmonyLib;
 using UnityEngine;
 
 namespace OverlyAttachedOdin
 {
-    [BepInPlugin("uk.co.oliapps.valheim.overlyattachedodin", "Overly Attached Odin", "0.0.1")]
+    [BepInPlugin("uk.co.oliapps.valheim.overlyattachedodin", "Overly Attached Odin", "0.0.2")]
     public class OverlyAttachedOdin : BaseUnityPlugin
 	{
-		private static bool spawnedOnPlayer;
-		public void Awake() => Harmony.CreateAndPatchAll(typeof(OverlyAttachedOdin), null);
+		private static ConfigEntry<int> followDistance;
+		private static ConfigEntry<int> vanishDistance;
 
-		[HarmonyPatch(typeof(Odin), "Awake")]
-		[HarmonyPostfix]
-		public static void Awake(ref Odin __instance)
+		public void Awake()
 		{
-			__instance.m_despawnCloseDistance = 10f;
-			__instance.m_despawnFarDistance = 30f;
+			followDistance = Config.Bind("General", "Follow Distance", 50, "Distance at which odin keeps his friendly distance");
+			vanishDistance = Config.Bind("General", "Vanish Distance", 10, "Distance at which odin disappears if you get too close (don't set as 0 if you don't want the coolness of Odin to wear off)");
+			Config.Save();
+			Harmony.CreateAndPatchAll(typeof(OverlyAttachedOdin), null);
 		}
 
 		[HarmonyPatch(typeof(Odin), "Update")]
@@ -32,7 +33,7 @@ namespace OverlyAttachedOdin
 			{
 				return false;
 			}
-			Player closestPlayer = Player.GetClosestPlayer(__instance.transform.position, __instance.m_despawnFarDistance);
+			Player closestPlayer = Player.GetClosestPlayer(__instance.transform.position, 1000f);
 			if (closestPlayer == null)
 			{
 				DespawnOdin(ref __instance, ref m_nview);
@@ -42,18 +43,18 @@ namespace OverlyAttachedOdin
 			Vector3 forward = closestPlayer.transform.position - __instance.transform.position;
 			forward.y = 0f;
 			forward.Normalize();
-			if (distanceToPlayer > __instance.m_despawnFarDistance)
+			if (distanceToPlayer > followDistance.Value)
 			{
-				__instance.transform.position = Vector3.MoveTowards(__instance.transform.position, __instance.transform.position + (forward.normalized * 50f), 0.1f);
+				__instance.transform.position = Vector3.MoveTowards(__instance.transform.position, __instance.transform.position + (forward.normalized * followDistance.Value), 0.1f);
 			}
-			else if (distanceToPlayer < __instance.m_despawnCloseDistance) 
-			{
-				DespawnOdin(ref __instance, ref m_nview);
-				return false;
-			} 
-			else
-			{
-				__instance.transform.position = Vector3.MoveTowards(__instance.transform.position, __instance.transform.position + (-forward.normalized * 50f), 0.1f);
+            else if (distanceToPlayer < vanishDistance.Value)
+            {
+                DespawnOdin(ref __instance, ref m_nview);
+                return false;
+            }
+            else
+            {
+				__instance.transform.position = Vector3.MoveTowards(__instance.transform.position, __instance.transform.position + (-forward.normalized * followDistance.Value), 0.1f);
 			}
 			__instance.transform.rotation = Quaternion.LookRotation(forward);
 			return false;
@@ -72,7 +73,6 @@ namespace OverlyAttachedOdin
 			if (m_time > __instance.m_ttl)
 			{
 				__instance.m_despawn.Create(__instance.transform.position, __instance.transform.rotation, null, 1f);
-				spawnedOnPlayer = false;
 				m_nview.Destroy();
 				ZLog.Log("timeout " + m_time + " , despawning");
 				return false;
